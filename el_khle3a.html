@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>EL KHLEA CHATBOT</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div id="chatbot">
+        <div id="chat-header">EL KHLEA CHATBOT</div>
+        <div id="chat-window">
+            <div id="messages"></div>
+        </div>
+        <div id="chat-input">
+            <input type="text" id="user-input" placeholder="Posez votre question..." />
+            <button id="send-btn">Envoyer</button>
+        </div>
+    </div>
+
+    <script>
+        
+        const responses = {
+            "bonjour": "Bonjour ! ",
+            "les chambres": "Nous avons des chambres simples, doubles et des suites.",
+            "réservation" : "Pour réserver une chambre dans notre hôtel, vous pouvez visiter notre site web, nous appeler directement, ou envoyer un email à notre service de réservation.",
+            "prix chambre simple": "le prix de chambre simple est 120dt",
+            "prix chambre double": "le prix de chambre double est 200dt",
+            "prix suit": "le prix de suit  est 400dt",
+            "offres " :  " Offre famille : Les enfants de moins de 12 ans séjournent gratuitement lorsqu'ils partagent la chambre avec leurs parents.",
+            "réductions": "Profitez de jusqu'à 20 % de réduction en réservant 30 jours à l'avance.",
+            "wifi": "Le Wi-Fi est gratuit dans tout l'hôtel.",
+            "restaurant": "Le restaurant est ouvert de 7h à 22h.",
+            "piscine": "La piscine est ouverte de 8h à 20h.",
+            "parking" : "Oui, l'hôtel dispose d'un parking gratuit pour les clients.",
+            "check-in" : "Le check-in à notre hôtel se fait à partir de 14h.",
+            "check-out" : "Le check-out à notre hôtel se fait avant 11h.",
+            "localisation" : "notre hotel est situé a tabrka",
+            "merci": "Avec plaisir ! Si vous avez d'autres questions, n'hésitez pas.",
+            "au revoir": "Au revoir ! Nous espérons vous revoir bientôt."
+
+
+        };
+
+        
+        function addMessage(content, sender) {
+            const message = document.createElement("div");
+            message.className = `message ${sender}`;
+            message.textContent = content;
+            document.getElementById("messages").appendChild(message);
+        }
+
+        
+        document.getElementById("send-btn").addEventListener("click", function() {
+            const userInput = document.getElementById("user-input");
+            const userText = userInput.value.trim().toLowerCase();
+
+            if (userText) {
+                addMessage(userInput.value, "user"); 
+                userInput.value = "";
+
+                
+                const botResponse = responses[userText] || "Je suis désolé, je ne comprends pas cette question.";
+                setTimeout(() => addMessage(botResponse, "bot"), ); 
+            }
+        });
+
+        
+        window.onload = () => {
+            addMessage("Bonjour et bienvenue a el khlea hotel !  Comment je vous aider ?  les chambres , réservation , prix chambre simple , prix chambre double , prix suit , parking , restaurant , wifi , check-in , check-out " , "bot" );
+        }
+        
+    </script>
+</body>
+</html>
